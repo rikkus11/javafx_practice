@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="444.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" >
+   <children>
+      <Label layoutX="109.0" layoutY="14.0" text="お問い合わせ">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="TxtAreaInquiry" layoutX="26.0" layoutY="164.0" prefHeight="200.0" prefWidth="388.0" />
+      <Label layoutX="29.0" layoutY="148.0" text="お問い合わせ内容">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="29.0" layoutY="61.0" text="お名前">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtName" layoutX="29.0" layoutY="79.0" prefHeight="22.0" prefWidth="388.0" />
+      <Button fx:id="btnSend" layoutX="180.0" layoutY="381.0" mnemonicParsing="false" onAction="#clickBtnSend" prefHeight="22.0" prefWidth="103.0" text="送信" />
+      <Button fx:id="btnBack" layoutX="311.0" layoutY="381.0" mnemonicParsing="false" onAction="#clickBtnBack" prefHeight="22.0" prefWidth="103.0" text="戻る" />
+   </children>
+</AnchorPane>

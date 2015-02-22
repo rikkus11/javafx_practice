@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="272.0" prefWidth="302.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" >
+   <children>
+   <!-- コントローラ一覧。idはスタイル用で、fx:idはControllerのイベントと関連付け用 -->
+      <Label layoutX="102.0" layoutY="67.0" text="Hello, JavaFX8!!" />
+      <TextField id="txtName" fx:id="txtName" layoutX="131.0" layoutY="114.0" />
+      <Label layoutX="52.0" layoutY="118.0" text="My Name Is" />
+      <Button id="btnSend" fx:id="btnSend" layoutX="85.0" layoutY="145.0" mnemonicParsing="false" onAction="#clickBtnSend" prefHeight="22.0" prefWidth="132.0" text="Send" />
+      <Label fx:id="lblAnswer" layoutX="58.0" layoutY="218.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="14.0" prefWidth="192.0" textAlignment="CENTER" />
+      <Button id="btnSend" fx:id="btnInquiry" layoutX="85.0" layoutY="179.0" mnemonicParsing="false" onAction="#clickBtnInquiry" prefHeight="22.0" prefWidth="132.0" text="お問い合わせへ" />
+   </children>
+</AnchorPane>
