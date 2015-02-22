@@ -10,11 +10,12 @@ import stage.StageManager;
 public abstract class AbstractController<T extends Parent> {
 
     /**
-     * {@link #getFXMLName()}で取得されるFXMLを読み込みます。cssを使用する場合は、cssNameにCSSファイル名を指定します。
+     * {@link #getFXMLName()}で取得されるFXMLを読み込みます。<br />
+     * cssとして{@link #getCssName()}で取得されるcssファイルを読み込みます。
      *
-     * @param cssName CSSファイル名(任意)
+     * @param newWindow 新ウィンドウで開くかどうかの真偽値
      */
-    public void loadFXML() {
+    public void loadFXML(boolean newWindow) {
 
         String fxmlName = getFXMLName();
         if (fxmlName == null || fxmlName.isEmpty()) {
@@ -45,7 +46,7 @@ public abstract class AbstractController<T extends Parent> {
         }
 
         // 読み込んだらそのまま画面を遷移させる。
-        StageManager.moveScene(getSceneTitle(), pane);
+        StageManager.moveScene(getSceneTitle(), pane, newWindow);
 
         // Paneを返す必要は無さそうなのでとりあえずvoid
     }

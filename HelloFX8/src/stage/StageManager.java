@@ -2,6 +2,7 @@ package stage;
 
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -35,19 +36,44 @@ public final class StageManager {
         return stage;
     }
 
-    public static void moveScene(String sceneTitle, Parent controller) {
+    /**
+     * 別画面へ遷移、あるいは別ウィンドウとして開きます。<br />
+     * 別ウィンドウの場合、モーダルウィンドウとして開きます。
+     *
+     * @param sceneTitle 画面タイトル
+     * @param controller
+     * @param newWindow
+     */
+    public static void moveScene(String sceneTitle, Parent controller, boolean newWindow) {
 
         // Sceneを取得し、無ければ新規作成する。
         Scene scene = stage.getScene();
 
-        if (scene == null) {
-            scene = new Scene(controller);
-            stage.setScene(scene);
-        } else {
-            scene.setRoot(controller);
-        }
+        if (newWindow) {
+            // 別ウィンドウの場合
 
-        stage.sizeToScene();
-        stage.show();
+            // 新しいモーダルウィンドウのStageを作成する。
+            Stage newStage = new Stage();
+
+            newStage.initModality(Modality.APPLICATION_MODAL);  // モーダル
+            newStage.initOwner(stage);                          // 親ウィンドウ
+            newStage.setTitle(sceneTitle);
+            newStage.setScene(new Scene(controller));
+            newStage.show();
+
+        } else {
+            // 同ウィンドウでの画面遷移の場合
+
+            if (scene == null) {
+                scene = new Scene(controller);
+                stage.setScene(scene);
+            } else {
+                scene.setRoot(controller);
+            }
+
+            stage.setTitle(sceneTitle);
+            stage.sizeToScene();
+            stage.show();
+        }
     }
 }

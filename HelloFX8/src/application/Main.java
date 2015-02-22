@@ -16,7 +16,7 @@ public class Main extends Application {
             StageManager.setStage(primaryStage);
 
             // 最初はTitle君を読み込む
-            new TitleController().loadFXML();
+            new TitleController().loadFXML(false);
 
             // AnchorPane titlePane = FXMLLoader.load(getClass().getResource("Title.fxml"));
             // Scene scene = new Scene(titlePane);

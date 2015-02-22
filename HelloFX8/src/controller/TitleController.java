@@ -60,7 +60,7 @@ public class TitleController extends AbstractController<AnchorPane> {
 
         InquiryController inquiryController = new InquiryController();
         inquiryController.setParameterMap(parameterMap);
-        inquiryController.loadFXML();
+        inquiryController.loadFXML(true);
     }
 
     @FXML

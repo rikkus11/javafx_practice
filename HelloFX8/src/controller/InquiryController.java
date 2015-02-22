@@ -22,7 +22,7 @@ public class InquiryController extends AbstractController<AnchorPane> {
 
     @FXML
     protected void clickBtnSend(ActionEvent ev) {
-        System.out.println("txtName =" + txtName);
+
     }
 
     @FXML
