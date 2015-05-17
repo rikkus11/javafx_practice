@@ -1,0 +1,19 @@
+@(form1: Form[User])
+
+@main("メッセージボード - ユーザ作成 -") {
+  <h1>メッセージボード新規ユーザ作成</h1>
+
+    @helper.form(action = routes.MessageBoard.newUser) {
+    <!-- CSRF対策用トークンをhidden出力 -->
+    @helper.CSRF.formField
+
+    @if(form1.hasGlobalErrors) {
+      <p>@form1.globalError.message</p>
+    }
+
+    @helper.inputText(field = form1("username"), '_label -> "ユーザ名")
+    @helper.inputText(field = form1("password"), '_label -> "パスワード")
+
+    @simpleInput("submit", "", "", "送信")
+  }
+}

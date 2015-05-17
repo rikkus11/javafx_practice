@@ -1,0 +1,19 @@
+@(msg: String, form1: Form[Message])
+
+@main("メッセージボード - メッセージ検索 -") {
+  <h1>メッセージ検索</h1>
+  <p>@msg</p>
+
+  @helper.form(action = routes.MessageBoard.editPage) {
+    @helper.inputText(field = form1("id"))
+
+    <!-- messageとnameはRequiredだから置いておかないとエラーになる -->
+    <!-- 通常、別にフォームクラスを作れば良さそうだがとりあえずhiddenで補完 -->
+    @simpleInput("hidden", "name", "name", "dummy")
+    @simpleInput("hidden", "message", "message", "dummy")
+
+    @simpleInput("submit", "", "", "送信")
+  }
+
+  <p><a href="@routes.MessageBoard.index" >メッセージを閲覧</a></p>
+}

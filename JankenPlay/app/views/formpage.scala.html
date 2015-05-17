@@ -1,0 +1,12 @@
+@(msg: String, form1: Form[Application.SampleForm])
+
+@main("Welcome to Play") {
+    <h1>フォームとヘルパー</h1>
+    <p>@msg</p>
+    @helper.form(action = routes.Application.send) {
+      @helper.inputText(field = form1("message"))
+
+      <input type="submit" value="送信" />
+    }
+
+}

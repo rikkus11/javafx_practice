@@ -1,0 +1,19 @@
+@(msg: String, form1: Form[forms.DetailSearchForm], datas: List[Message])
+
+@main("メッセージボード - メッセージ詳細検索 -") {
+  <h1>メッセージ詳細検索</h1>
+  <p>@msg</p>
+
+  @helper.form(action = routes.MessageBoard.detailSearch) {
+    @helper.inputText(field = form1("name"))
+    @helper.checkbox(field = form1("isLike"), '_label -> "部分一致検索")
+
+    @simpleInput("submit", "", "", "送信")
+  }
+
+  <hr>
+  <h1>検索結果</h1>
+  @messageTable(datas)
+  <hr>
+  <p><a href="@routes.MessageBoard.index" >メッセージを閲覧</a></p>
+}

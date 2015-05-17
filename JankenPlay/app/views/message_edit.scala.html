@@ -1,0 +1,21 @@
+@(msg: String, form1: Form[Message])
+
+@main("メッセージボード - メッセージ編集 -") {
+  <h1>メッセージ編集</h1>
+  <p>@msg</p>
+
+  @helper.form(action = routes.MessageBoard.update) {
+
+    <!-- IDは検索された値をhidden保持 -->
+    @simpleInput("hidden", "id", "id", form1("id").value)
+
+    <!-- name, mail, messageをform関連付け -->
+    @helper.inputText(field = form1("name"))
+    @helper.inputText(field = form1("mail"))
+    @helper.textarea(field = form1("message"))
+
+    @simpleInput("submit", "", "", "送信")
+  }
+
+  <p><a href="@routes.MessageBoard.index" >新規ユーザ作成</a></p>
+}
