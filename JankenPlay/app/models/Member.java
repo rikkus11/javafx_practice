@@ -2,7 +2,10 @@ package models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import play.data.validation.Constraints.Email;
 import play.data.validation.Constraints.Required;
@@ -14,6 +17,7 @@ import play.db.ebean.Model;
  * @author リックス
  *
  */
+@Entity
 public class Member extends Model {
 
     /** レコードID */
@@ -29,6 +33,13 @@ public class Member extends Model {
 
     /** 電話番号 */
     public String tel;
+
+    /**
+     * メッセージレコード。MESSAGEテーブルと多 - 1で紐付けるためOneToManyを付与。もしMemberのUpdate時にMessageが代わってればそれも全てUpdateする
+     * Member側はOneToMany、つまり1人のユーザが投稿した全部のメッセージを管理する。こっちはMemberなので、全部のメッセージを持つ
+     */
+    @OneToMany(cascade = CascadeType.ALL)
+    public List<Message> message;
 
     /** 検索用Finder */
     public static Finder<Long, Member> find = new Finder<>(Long.class, Member.class);

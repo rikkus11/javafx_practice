@@ -1,0 +1,20 @@
+@(ticket: models.entity.Ticket)
+
+  <table border=1>
+  <tr>
+  <th>タイトル</th>
+  <td>@ticket.title</td>
+  </tr>
+  <tr>
+  <th>開始日</th>
+  <td>@ticket.startDate</td>
+  </tr>
+  <tr>
+  <th>終了日</th>
+  <td>@ticket.endDate</td>
+  </tr>
+  <tr>
+  <th>本文</th>
+  <td>@ticket.content</td>
+  </tr>
+  </table>

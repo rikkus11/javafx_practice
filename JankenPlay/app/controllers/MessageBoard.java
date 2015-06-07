@@ -3,6 +3,7 @@ package controllers;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
+import models.Member;
 import models.Message;
 import models.Secured;
 import models.User;
@@ -12,6 +13,7 @@ import play.filters.csrf.RequireCSRFCheck;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security.Authenticated;
+import views.html.add_member;
 import views.html.login;
 import views.html.message_detail_search;
 import views.html.message_edit;
@@ -36,7 +38,10 @@ public class MessageBoard extends Controller {
         // Messageを全て検索する。構文が凄い分かりやすいい！！いいね！
         List<Message> messageDatas = Message.find.all();
 
-        return ok(messageboard.render(messageDatas));
+        // Memberも。
+        List<Member> memberDatas = Member.find.all();
+
+        return ok(messageboard.render(messageDatas, memberDatas));
 
     }
 
@@ -49,7 +54,7 @@ public class MessageBoard extends Controller {
     public static Result postPage() {
 
         // 空フォームでmessage_postを出力
-        Form<Message> defaultForm = new Form<Message>(Message.class);
+        Form<Message> defaultForm = new Form<>(Message.class);
 
         return ok(message_post.render(defaultForm));
     }
@@ -71,6 +76,9 @@ public class MessageBoard extends Controller {
 
             // エラーが無い場合、入力値をテーブルに格納(Model#saveを呼ぶだけ)
             Message data = input.get();
+
+            // Member紐付け化。Memberを同じ名前で探してひも付けてから保存する
+            data.member = Member.findByName(data.name);
             data.save();
 
             // 登録完了メッセージを出しても良いが、ひとまず一覧ページに戻す
@@ -79,6 +87,48 @@ public class MessageBoard extends Controller {
 
             // エラーの場合、再表示
             return badRequest(message_post.render(input));
+        }
+    }
+
+    /**
+     * <p>メンバー登録ページにアクセスした際の処理</p>
+     * <p>add_memberを出力します。</p>
+     *
+     * @return ok
+     */
+    public static Result addMemberPage() {
+
+        // 空フォームでmessage_postを出力
+        Form<Member> defaultForm = new Form<>(Member.class);
+
+        return ok(add_member.render(defaultForm));
+    }
+
+    /**
+     * <p>メンバー登録ページからの送信処理</p>
+     * <p>入力値のバリデーションチェック後、Messageテーブルに登録します。</p>
+     *
+     * @return バリデーションエラー時：badrequest。正常終了時：ok
+     */
+    public static Result createMember() {
+
+        // フォーム情報を取得
+        Form<Member> input = Form.form(Member.class).bindFromRequest();
+
+        // バインド時にアノテーションチェックを行い、エラーがある場合はtrue
+        // Form#hasErrorsはバインドエラーの検知であって、バインド系メソッドを呼ばなければtrueにはならない。
+        if (!input.hasErrors()) {
+
+            // エラーが無い場合、入力値をテーブルに格納(Model#saveを呼ぶだけ)
+            Member data = input.get();
+            data.save();
+
+            // 登録完了メッセージを出しても良いが、ひとまず一覧ページに戻す
+            return redirect(routes.MessageBoard.index());
+        } else {
+
+            // エラーの場合、再表示
+            return badRequest(add_member.render(input));
         }
     }
 

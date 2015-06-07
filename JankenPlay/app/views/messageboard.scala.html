@@ -1,12 +1,14 @@
-@(datas: List[Message])
+@(datas: List[Message], members: List[Member])
 
 @main("メッセージボード - メッセージ一覧 -") {
   <h1>メッセージ一覧</h1>
   <p>投稿されたメッセージの一覧です。</p>
 
   @messageTable(datas)
+  @memberTable(members)
 
   <p><a href="@routes.MessageBoard.postPage" >メッセージを投稿</a></p>
+  <p><a href="@routes.MessageBoard.addMemberPage" >メンバーを作成</a></p>
   <p><a href="@routes.MessageBoard.searchPage" >メッセージを検索</a></p>
   <p><a href="@routes.MessageBoard.showDetailSearch" >メッセージ詳細検索</a></p>
   <p><a href="@routes.MessageBoard.logout" >ログアウト</a></p>

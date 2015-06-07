@@ -1,0 +1,27 @@
+@(f: Form[models.entity.Ticket])
+
+@main("Rixmineチケット登録") {
+  <h1>Rixmine</h1>
+
+  <hr>
+  <p>チケット登録</p>
+  @if(f.hasGlobalErrors) {
+    @f.globalError.message
+  }
+
+  @if(f.data().get("success") == "true") {
+    <p style="color: blue;">登録に成功しました。</p>
+  }
+
+  @helper.form(action = routes.RixmineTickets.addTicket) {
+    @helper.inputText(field = f("title"), '_label -> "タイトル")
+    @helper.inputDate(field = f("startDate"), '_label -> "開始日")
+    @helper.inputDate(field = f("endDate"), '_label -> "終了日")
+    @helper.textarea(field = f("content"), '_label -> "本文")
+
+    <input type="submit" value="登録" />
+  }
+
+  <p><a href="@routes.RixmineTickets.index">メインページへ戻る</a></p>
+
+}

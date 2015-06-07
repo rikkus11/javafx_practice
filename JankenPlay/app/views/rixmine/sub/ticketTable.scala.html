@@ -1,0 +1,18 @@
+@(tickets: List[models.entity.Ticket])
+
+  <table border=1>
+  <tr>
+  <th>タイトル</th>
+  <th>開始日</th>
+  <th>終了日</th>
+  @if(tickets != null) {
+    @for((ticket) <- tickets) {
+
+      <tr>
+      <td><a href="@routes.RixmineTickets.detailTicket(ticket.id)">@ticket.title</a></td>
+      <td>@ticket.startDate</td>
+      <td>@ticket.endDate</td>
+      </tr>
+    }
+  }
+  </table>

@@ -1,11 +1,11 @@
 /ApplicationTest.class
 /IntegrationTest.class
-/application.conf
-/assets/
 /controllers/
-/evolutions/
-/forms/
+/MessageBoardTest.class
+/messagoboard-test.yaml
+/messagoboard-test.yml
 /models/
-/routes
-/settings/
+/rixmine/
 /views/
+/evolutions/
+/form/

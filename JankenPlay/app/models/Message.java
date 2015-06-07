@@ -3,10 +3,11 @@ package models;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
-import play.data.validation.Constraints.Email;
 import play.data.validation.Constraints.MaxLength;
 import play.data.validation.Constraints.Pattern;
 import play.data.validation.Constraints.Required;
@@ -32,10 +33,6 @@ public class Message extends Model {
     @MaxLength(16)
     public String name;
 
-    /** 投稿者メールアドレス */
-    @Email(message = "メールアドレスを入力してください。")
-    public String mail;
-
     /** メッセージ本文 */
     @Required(message = "必須項目です。")
     @Pattern(message = "半角英数字のみ入力してください", value = "[a-zA-Z]+")
@@ -45,6 +42,13 @@ public class Message extends Model {
     @CreatedTimestamp
     public Date postDate;
 
+    /**
+     * 投稿者。MEMBERテーブルと1 - 多で紐付けるためManyToOneを付与。もしMessageのUpdate時にMemberが代わってればそれも全てUpdateする
+     * Message側はManyToOne、つまり1人のユーザが投稿した全部のメッセージを管理する。こっちはMessageなので、1人のユーザを持つ
+     */
+    @ManyToOne(cascade = CascadeType.ALL)
+    public Member member;
+
     /** Messageレコード検索用Finder。主キーLongと取得されるエンティティ(Message)を設定しています */
     public static Finder<Long, Message> find = new Finder<>(Long.class, Message.class);
 
@@ -53,7 +57,7 @@ public class Message extends Model {
      */
     @Override
     public String toString() {
-        return "Message [id=" + id + ", name=" + name + ", mail=" + mail + ", message=" + message + ", postDate="
+        return "Message [id=" + id + ", name=" + name + ", message=" + message + ", postDate="
                 + postDate + "]";
     }
 

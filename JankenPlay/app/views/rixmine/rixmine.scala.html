@@ -1,0 +1,12 @@
+@(tickets: List[models.entity.Ticket])
+
+@main("Rixmineメインページ") {
+  <h1>Rixmine</h1>
+
+  <hr>
+  <a href="@routes.RixmineTickets.showAddTicket">チケット登録</a>
+  <hr>
+  <p>チケット一覧</p>
+  @sub.ticketTable(tickets)
+
+}

@@ -1,0 +1,11 @@
+@(ticket: models.entity.Ticket)
+
+@main("Rixmineチケット詳細") {
+  <h1>Rixmine</h1>
+
+  <hr>
+  <p>チケット詳細</p>
+  @sub.ticketDetail(ticket)
+  <p><a href="@routes.RixmineTickets.index">メインページへ戻る</a></p>
+
+}

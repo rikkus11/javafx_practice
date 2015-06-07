@@ -2,8 +2,14 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
+# rixmine
+GET      /                          controllers.RixmineTickets.index()
+GET     /add_ticket                 controllers.RixmineTickets.showAddTicket()
+POST    /add_ticket                 controllers.RixmineTickets.addTicket()
+GET     /detail_ticket/:id          controllers.RixmineTickets.detailTicket(id:Long)
+
 # Home page
-GET     /                           controllers.Application.index()
+GET     /test                           controllers.Application.index()
 POST    /send                       controllers.Application.send()
 GET     /formpage                   controllers.Application.formPage()
 GET     /message_board              controllers.MessageBoard.index()
@@ -14,12 +20,18 @@ POST    /message_edit               controllers.MessageBoard.editPage()
 POST    /message_edit_post          controllers.MessageBoard.update()
 GET     /message_detail_search      controllers.MessageBoard.showDetailSearch()
 POST    /message_detail_search      controllers.MessageBoard.detailSearch()
+# Login
 GET     /message_board_login        controllers.MessageBoard.showLogin()
 POST    /message_board_login        controllers.MessageBoard.login()
+# Logout
 GET     /message_board_logout       controllers.MessageBoard.logout()
+# New LoginUser
 GET    /message_board_new_user      controllers.MessageBoard.showNewUser()
 POST    /message_board_new_user     controllers.MessageBoard.newUser()
-
+# add Member Page
+GET     /add_member                 controllers.MessageBoard.addMemberPage()
+POST    /add_member                 controllers.MessageBoard.createMember()
+#
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

@@ -1,6 +1,6 @@
-@(form1: Form[Message])
+@(form1: Form[Member])
 
-@main("メッセージボード - メッセージ投稿 -") {
+@main("メッセージボード - メンバー作成 -") {
     <h1>メッセージ投稿</h1>
     <p>以下に情報を入力して、送信ボタンを押してください。</p>
 
@@ -9,9 +9,10 @@
       <h2>@form1.globalError.message</h2>
     }
 
-    @helper.form(action = routes.MessageBoard.create) {
+    @helper.form(action = routes.MessageBoard.createMember) {
       @helper.inputText(field = form1("name"), '_label -> "お名前")
-      @helper.textarea(field = form1("message"), '_label -> "本文")
+      @helper.textarea(field = form1("mail"), '_label -> "メールアドレス")
+      @helper.textarea(field = form1("tel"), '_label -> "電話番号")
       <input type="submit" value="送信" />
     }
 
